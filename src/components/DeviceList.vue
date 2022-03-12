@@ -47,10 +47,22 @@ export default defineComponent({
 </script>
 
 <template >
-<div v-if="devices !== null">
-  <device-component v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, isDetailed: false}"></device-component>
+<div class="device-list" v-if="devices !== null">
+  <device-component v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, showDetailed: true}"></device-component>
   <!--<template v-for="(device, index) in devices" :key="index">
       {{device}}
   </template>-->
   </div>
 </template>
+
+<style lang="scss">
+.device-list{
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100vw), 1fr));
+    grid-auto-rows: 1fr;
+    place-items: center;
+    row-gap: 2rem;
+}
+</style>

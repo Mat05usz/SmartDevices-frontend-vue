@@ -9,8 +9,13 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
+    "@vue/babel-preset-jsx": "^1.2.4",
     "fetch-mock": "^9.11.0",
     "mock-socket": "^9.1.2",
+    "node-sass": "^7.0.1",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
     "vue": "^3.2.31"
   },
   "devDependencies": {

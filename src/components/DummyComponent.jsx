@@ -1,0 +1,7 @@
+export function DummyComponent(){
+
+    return(
+        <>
+        </>
+    );
+}

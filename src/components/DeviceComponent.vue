@@ -4,16 +4,15 @@ import { DeviceProps } from '../interfaces/PropsInterfaces';
 
 export default defineComponent({
     props: {
-        deviceProps: {
-            type: Object as PropType<DeviceProps>,
-            required: true
-        }
+        deviceProps: Object as PropType<DeviceProps>
     },
+    
+    
 });
 </script>
 
 <template>
   <div class="device-wrapper">
-      testd
+      {{deviceProps.device}}
   </div>
 </template>

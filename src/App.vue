@@ -1,6 +1,11 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import DeviceList from './components/DeviceList.vue'
+import { setupMockSocketServer } from './mock-api/MockSocket';
+import setupMockFetch from './mock-api/MockFetch';
+
+setupMockSocketServer();
+setupMockFetch();
 
 export default defineComponent({
 

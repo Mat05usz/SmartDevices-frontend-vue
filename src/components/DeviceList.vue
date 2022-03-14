@@ -11,13 +11,13 @@ export default defineComponent({
   components: {
     DeviceComponent,
   },
+  props:{
+    clickedDevice: Object as PropType<SmartDevice>,
+    setClickedDevice: Function
+  },
   data() {
     return {
       devices: [] as SmartDevice[],
-      x: {
-          device: this.devices,
-            detailed: false
-      }
     };
   },
   mounted() {
@@ -41,14 +41,23 @@ export default defineComponent({
         }
         this.devices = fetchedDevices;
       };
-    },
+    },  
   },
+  watch:{
+    devices(newDevices: SmartDevice[]){
+      if(this.clickedDevice && this.setClickedDevice)
+      {
+        //console.log(newDevices.filter(device => device.id === this.clickedDevice?.id)[0])
+        this.setClickedDevice(newDevices.filter(device => device.id === this.clickedDevice?.id)[0]);
+      }
+    }
+  }
 });
 </script>
 
 <template >
 <div class="device-list" v-if="devices !== null">
-  <device-component v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, showDetailed: true}"></device-component>
+  <device-component v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, showDetailed: false, setClickedDevice: setClickedDevice}"></device-component>
   <!--<template v-for="(device, index) in devices" :key="index">
       {{device}}
   </template>-->

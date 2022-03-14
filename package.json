@@ -12,6 +12,7 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "@vue/babel-preset-jsx": "^1.2.4",
     "fetch-mock": "^9.11.0",
+    "interactjs": "^1.10.11",
     "mock-socket": "^9.1.2",
     "node-sass": "^7.0.1",
     "sass": "^1.49.9",

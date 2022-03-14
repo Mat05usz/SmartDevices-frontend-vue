@@ -29,54 +29,43 @@ export default defineComponent({
           return null;
         }
       },
-      set(newDevice: SmartDevice){
-        //console.log(newDevice)
+      set(newDevice: SmartDevice) {
         this.device = newDevice;
-      }
-    }
-    /*showWindow(){
-      if(this.device)
-      {
-        return this.device instanceof DeviceData}
-      return false;
-    }*/
+      },
+    },
   },
   methods: {
     setClickedDevice(newDevice: SmartDevice) {
-      //console.log(newDevice)
       this.clickedDevice = newDevice;
     },
   },
   watch: {
     device() {
-      if (this.device instanceof DeviceData) {
+      if (this.device !== null ) {
         this.showWindow = true;
       } else {
         this.showWindow = false;
       }
     },
   },
-  mounted() {
-    console.log(this.device instanceof DeviceData);
-  },
 });
 </script>
 
 <template>
-{{device}}
   <DeviceList
     :clickedDevice="clickedDevice"
     :setClickedDevice="setClickedDevice"
   />
+  <keep-alive>
   <DeviceWindow
     v-if="device !== null"
-    :d="device"
     :deviceProps="{
       device: device,
       showDetailed: true,
       setClickedDevice: setClickedDevice,
     }"
   />
+  </keep-alive>
 </template>
 
 <style>

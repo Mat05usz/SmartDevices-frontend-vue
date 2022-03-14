@@ -47,7 +47,6 @@ export default defineComponent({
     devices(newDevices: SmartDevice[]){
       if(this.clickedDevice && this.setClickedDevice)
       {
-        //console.log(newDevices.filter(device => device.id === this.clickedDevice?.id)[0])
         this.setClickedDevice(newDevices.filter(device => device.id === this.clickedDevice?.id)[0]);
       }
     }
@@ -57,10 +56,7 @@ export default defineComponent({
 
 <template >
 <div class="device-list" v-if="devices !== null">
-  <device-component v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, showDetailed: false, setClickedDevice: setClickedDevice}"></device-component>
-  <!--<template v-for="(device, index) in devices" :key="index">
-      {{device}}
-  </template>-->
+  <DeviceComponent v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, showDetailed: false, setClickedDevice: setClickedDevice}"></DeviceComponent>
   </div>
 </template>
 

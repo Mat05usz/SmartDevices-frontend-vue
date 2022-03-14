@@ -4,6 +4,7 @@ import { DeviceProps } from "@/interfaces/PropsInterfaces";
 import { defineComponent } from "@vue/runtime-core";
 import { PropType } from "vue";
 import DeviceComponent from "./DeviceComponent.vue";
+import "../styles/device.scss";
 
 export default defineComponent({
   props: {
@@ -129,6 +130,7 @@ export default defineComponent({
   display: block;
   position: absolute;
   z-index: 999;
+  height: 400px;
   .close-button {
     position: absolute;
     right: 2px;

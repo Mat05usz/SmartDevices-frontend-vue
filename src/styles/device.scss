@@ -80,15 +80,17 @@
       flex: 1;
       flex-wrap: wrap;
       justify-content: space-evenly;
-  
+      
       .device-detail-title {
         color: #5f5f5f;
       }
   
       .device-detail {
         display: flex;
+        height: 53px;
         flex-wrap: wrap;
         place-items: center;
+        align-items: flex-start;
         justify-content: center;
         width: 100%;
         .device-detail-title{
@@ -138,7 +140,7 @@
       & > * {
         width: max-content;
         text-align: center;
-        flex-basis: 150px;
+        flex-basis: 170px;
       }
     }
   }

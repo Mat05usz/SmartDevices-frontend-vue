@@ -9,7 +9,6 @@ import { DeviceProps } from "../interfaces/PropsInterfaces";
 import "../styles/device.scss";
 import DeviceDecorators from "./device-decorators/DeviceDecorators.vue";
 
-
 export default defineComponent({
   components: {
     DeviceDecorators,
@@ -51,7 +50,13 @@ export default defineComponent({
 <template>
   <div
     class="device-wrapper"
-    @click="()=>{if(deviceProps.setClickedDevice) {deviceProps.setClickedDevice(deviceProps.device)}}"
+    @click="
+      () => {
+        if (deviceProps.setClickedDevice) {
+          deviceProps.setClickedDevice(deviceProps.device);
+        }
+      }
+    "
   >
     <p class="device-type">
       <b>{{ fields[0][1] }}</b>
@@ -80,15 +85,18 @@ export default defineComponent({
         <b>{{ fields[3][1] }}</b>
       </p>
       <div class="status-dot-container">
-        <span class="device-status-dot" style=""></span>
+        <span class="device-status-dot"
+        :style="{
+                backgroundColor: statusDotColors[deviceProps.device.connectionState],
+              }"></span>
       </div>
     </div>
-    <div
-      class="device-details"
-      v-for="(field, index) in filterFields"
-      :key="index"
-    >
-      <div class="device-detail" key="{index}">
+    <div class="device-details">
+      <div
+        class="device-detail"
+        v-for="(field, index) in filterFields"
+        :key="index"
+      >
         <p class="device-detail-title">{{ field[0] }}</p>
         <p class="device-detail-value">
           <b>{{ field[1] }}</b>
@@ -98,11 +106,6 @@ export default defineComponent({
             :decorator="Object.keys(deviceProps.device)[index + 4]"
             :argument="field[1]"
           />
-          <!-- {{
-                      //Check comment above the definition to understand what it does
-                      //Object.keys(device)[index + 4] is an offset to get to fields that have SVG representation
-                      //deviceDecorators[device.type][Object.keys(device)[index + 4]](entry[1])
-          }} -->
         </div>
       </div>
     </div>

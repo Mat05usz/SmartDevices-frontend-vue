@@ -1,10 +1,8 @@
 <script lang="ts">
-import { computed, defineComponent } from "@vue/runtime-core";
+import { defineComponent } from "@vue/runtime-core";
 import DeviceList from "./components/DeviceList.vue";
 import { setupMockSocketServer } from "./mock-api/MockSocket";
-import setupMockFetch from "./mock-api/MockFetch";
-import { DeviceData, SmartDevice } from "./interfaces/DeviceInterfaces";
-import { PropType } from "vue";
+import { SmartDevice } from "./interfaces/DeviceInterfaces";
 import DeviceWindow from "./components/DeviceWindow.vue";
 
 setupMockSocketServer();
@@ -24,10 +22,7 @@ export default defineComponent({
   computed: {
     clickedDevice: {
       get(): SmartDevice | null {
-        if (this.device) return this.device;
-        else {
-          return null;
-        }
+        return this.device;
       },
       set(newDevice: SmartDevice) {
         this.device = newDevice;
@@ -41,31 +36,31 @@ export default defineComponent({
   },
   watch: {
     device() {
-      if (this.device !== null ) {
-        this.showWindow = true;
-      } else {
-        this.showWindow = false;
-      }
+      this.device !== null
+        ? (this.showWindow = true)
+        : (this.showWindow = false);
     },
   },
 });
 </script>
 
 <template>
-  <DeviceList
-    :clickedDevice="clickedDevice"
-    :setClickedDevice="setClickedDevice"
-  />
-  <keep-alive>
-  <DeviceWindow
-    v-if="device !== null"
-    :deviceProps="{
-      device: device,
-      showDetailed: true,
-      setClickedDevice: setClickedDevice,
-    }"
-  />
-  </keep-alive>
+  <div class="wrapper">
+    <DeviceList
+      :clickedDevice="clickedDevice"
+      :setClickedDevice="setClickedDevice"
+    />
+    <keep-alive>
+      <DeviceWindow
+        v-if="device !== null"
+        :deviceProps="{
+          device: device,
+          showDetailed: true,
+          setClickedDevice: setClickedDevice,
+        }"
+      />
+    </keep-alive>
+  </div>
 </template>
 
 <style>
@@ -146,5 +141,8 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+.wrapper {
+  margin: 0 max(calc(50vw - 550px), 0.5rem);
 }
 </style>

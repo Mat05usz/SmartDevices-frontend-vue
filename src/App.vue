@@ -19,19 +19,9 @@ export default defineComponent({
       showWindow: false,
     } as { device: SmartDevice | null; showWindow: boolean };
   },
-  computed: {
-    clickedDevice: {
-      get(): SmartDevice | null {
-        return this.device;
-      },
-      set(newDevice: SmartDevice) {
-        this.device = newDevice;
-      },
-    },
-  },
   methods: {
     setClickedDevice(newDevice: SmartDevice) {
-      this.clickedDevice = newDevice;
+      this.device = newDevice;
     },
   },
   watch: {
@@ -46,10 +36,7 @@ export default defineComponent({
 
 <template>
   <div class="wrapper">
-    <DeviceList
-      :clickedDevice="clickedDevice"
-      :setClickedDevice="setClickedDevice"
-    />
+    <DeviceList :clickedDevice="device" :setClickedDevice="setClickedDevice" />
     <keep-alive>
       <DeviceWindow
         v-if="device !== null"

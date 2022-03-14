@@ -130,7 +130,7 @@ export default defineComponent({
   display: block;
   position: absolute;
   z-index: 999;
-  height: 400px;
+  height: 430px;
   .close-button {
     position: absolute;
     right: 2px;

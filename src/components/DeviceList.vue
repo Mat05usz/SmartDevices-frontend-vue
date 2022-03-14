@@ -11,9 +11,9 @@ export default defineComponent({
   components: {
     DeviceComponent,
   },
-  props:{
+  props: {
     clickedDevice: Object as PropType<SmartDevice>,
-    setClickedDevice: Function
+    setClickedDevice: Function,
   },
   data() {
     return {
@@ -21,8 +21,6 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log("Mounted DeviceList");
-
     this.handleSocketConnection();
   },
   methods: {
@@ -41,33 +39,41 @@ export default defineComponent({
         }
         this.devices = fetchedDevices;
       };
-    },  
+    },
   },
-  watch:{
-    devices(newDevices: SmartDevice[]){
-      if(this.clickedDevice && this.setClickedDevice)
-      {
-        this.setClickedDevice(newDevices.filter(device => device.id === this.clickedDevice?.id)[0]);
+  watch: {
+    devices(newDevices: SmartDevice[]) {
+      if (this.clickedDevice && this.setClickedDevice) {
+        this.setClickedDevice(
+          newDevices.filter((device) => device.id === this.clickedDevice?.id)[0]
+        );
       }
-    }
-  }
+    },
+  },
 });
 </script>
 
 <template >
-<div class="device-list" v-if="devices !== null">
-  <DeviceComponent v-for="(device, index) in devices" :key="index" :deviceProps="{device: device, showDetailed: false, setClickedDevice: setClickedDevice}"></DeviceComponent>
+  <div class="device-list" v-if="devices !== null">
+    <DeviceComponent
+      v-for="(device, index) in devices"
+      :key="index"
+      :deviceProps="{
+        device: device,
+        showDetailed: false,
+        setClickedDevice: setClickedDevice,
+      }"
+    ></DeviceComponent>
   </div>
 </template>
 
 <style lang="scss">
-.device-list{
-
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100vw), 1fr));
-    grid-auto-rows: 1fr;
-    place-items: center;
-    row-gap: 2rem;
+.device-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100vw), 1fr));
+  grid-auto-rows: 1fr;
+  place-items: center;
+  row-gap: 2rem;
 }
 </style>
